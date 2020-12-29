@@ -14,14 +14,7 @@ import {
   makeStyles
 } from '@material-ui/core';
 
-const user = {
-  avatar: '/static/images/avatars/avatar_6.png',
-  city: 'Los Angeles',
-  country: 'USA',
-  jobTitle: 'Senior Developer',
-  name: 'Katarina Smith',
-  timezone: 'GTM-7'
-};
+
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -31,9 +24,9 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Profile = ({ className, ...rest }) => {
+const Profile = ({ className,user1, ...rest }) => {
   const classes = useStyles();
-
+ console.log('mi user',user1)
   return (
     <Card
       className={clsx(classes.root, className)}
@@ -47,27 +40,28 @@ const Profile = ({ className, ...rest }) => {
         >
           <Avatar
             className={classes.avatar}
-            src={user.avatar}
+            src={user1.picture}
           />
           <Typography
             color="textPrimary"
             gutterBottom
             variant="h3"
+            align="center"
           >
-            {user.name}
+            {user1.name}
           </Typography>
           <Typography
             color="textSecondary"
             variant="body1"
           >
-            {`${user.city} ${user.country}`}
+            {`Actualizado`}
           </Typography>
           <Typography
             className={classes.dateText}
             color="textSecondary"
             variant="body1"
           >
-            {`${moment().format('hh:mm A')} ${user.timezone}`}
+            {`${user1.updated_at}`}
           </Typography>
         </Box>
       </CardContent>
