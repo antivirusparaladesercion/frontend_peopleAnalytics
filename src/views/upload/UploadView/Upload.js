@@ -17,6 +17,7 @@ import {
 } from '@material-ui/core';
 
 import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react';
+//import config from 'src/auth_config.json';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -25,55 +26,10 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Upload = ({ className, ...rest }) => {
+const Upload = ({ className,prefi,userMetadata, ...rest }) => {
   //Obtener metadata
 
-  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
-
-  //
-  let prefix_u = '';
-  const [userMetadata, setUserMetadata] = useState(null);
-
-  if (userMetadata) {
-    prefix_u = userMetadata.u_prefix;
-    console.log('prueba adentro prefix_u: ', prefix_u);
-  }
-
-  useEffect(() => {
-    const getUserMetadata = async () => {
-      const domain = process.env.REACT_APP_DOMAIN;
-
-      try {
-        const accessToken = await getAccessTokenSilently({
-          audience: `https://${domain}/api/v2/`,
-          scope: 'read:current_user'
-        });
-
-        const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
-
-        const metadataResponse = await fetch(userDetailsByIdUrl, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`
-          }
-        });
-
-        const { user_metadata } = await metadataResponse.json();
-
-        setUserMetadata(user_metadata);
-      } catch (e) {
-        console.log(e.message);
-      }
-    };
-
-    getUserMetadata();
-  }, []);
-
-  //
-  if (userMetadata) {
-    console.log('prueba: ', JSON.stringify(userMetadata.u_prefix, null, 2));
-  }
-
-  console.log('uuser: ', user);
+  
 
   //
   const classes = useStyles();
@@ -97,24 +53,26 @@ const Upload = ({ className, ...rest }) => {
   };
 
   const handleSubmit = async event => {
+    console.log('aprete boton',prefi,userMetadata)
     event.preventDefault();
     try {
       if (!values['archivo']) {
         throw new Error('Secciona un archivo primero');
       }
       //
-      if (prefix_u.length > 0 && userMetadata) {
+
+      if (prefi.length > 0 && userMetadata) {
         console.log(
           'prueba adentro para enviar a bucket: ',
-          userMetadata.u_prefix
+           userMetadata.u_prefix
         );
 
         const formData = new FormData();
-        formData.append('bucketName', prefix_u);
+        formData.append('bucketName', prefi);
         formData.append('data', values['archivo'][0]);
         console.log('el archivo: ', values['archivo'][0]);
         await axios
-          .post('http://localhost:8080/api/v1/data-upload', formData, {
+          .post('http://ApiPeopleAnalyticsDev-env.eba-v39ukvyc.us-east-2.elasticbeanstalk.com/api/v1/data-upload', formData, {
             headers: {
               enctype: 'multipart/form-data'
             }
