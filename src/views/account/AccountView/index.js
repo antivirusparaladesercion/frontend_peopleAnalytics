@@ -7,7 +7,7 @@ import {
 import Page from 'src/components/Page';
 import Profile from './Profile';
 import ProfileDetails from './ProfileDetails';
-import { withAuthenticationRequired } from "@auth0/auth0-react";
+import { useAuth0,withAuthenticationRequired } from "@auth0/auth0-react";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -22,7 +22,12 @@ const useStyles = makeStyles((theme) => ({
 const Account = () => {
   const classes = useStyles();
 
-  return (
+
+ //obtener usuario
+ const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+
+
+  return isAuthenticated &&(
     <Page
       className={classes.root}
       title="Account"
@@ -38,7 +43,7 @@ const Account = () => {
             md={6}
             xs={12}
           >
-            <Profile />
+            <Profile user1={user} />
           </Grid>
           <Grid
             item
@@ -46,7 +51,7 @@ const Account = () => {
             md={6}
             xs={12}
           >
-            <ProfileDetails />
+            <ProfileDetails user1={user} />
           </Grid>
         </Grid>
       </Container>
