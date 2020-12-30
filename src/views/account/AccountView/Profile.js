@@ -66,15 +66,7 @@ const Profile = ({ className,user1, ...rest }) => {
         </Box>
       </CardContent>
       <Divider />
-      <CardActions>
-        <Button
-          color="primary"
-          fullWidth
-          variant="text"
-        >
-          Upload picture
-        </Button>
-      </CardActions>
+      
     </Card>
   );
 };

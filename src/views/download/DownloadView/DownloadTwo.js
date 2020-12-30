@@ -81,7 +81,7 @@ const DownloadTwo = ({ className, customers, prefi, ...rest }) => {
             <LinearProgress color="secondary" />
           </CardContent>
         </>
-      ) : (
+      ): (
         <>
           <CardHeader
             subheader="Estos son los reportes de predicciones que su institución ha generado."
@@ -100,31 +100,39 @@ const DownloadTwo = ({ className, customers, prefi, ...rest }) => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {responseData.slice(page * limit , page * limit + limit).map(link => (
-                      <TableRow hover key={link.date}>
-                        <TableCell>
-                          <Box alignItems="center" display="flex">
-                            <Typography color="textPrimary" variant="body1">
-                              {link.file_name}
-                            </Typography>
-                          </Box>
-                        </TableCell>
-                        <TableCell>
-                          <Box alignItems="center" display="flex">
-                            <Typography color="textPrimary" variant="body1">
-                              <Link href={link.url}>Descargar</Link>
-                            </Typography>
-                          </Box>
-                        </TableCell>
-                        <TableCell>
-                          <Box alignItems="center" display="flex">
-                            <Typography color="textPrimary" variant="body1">
-                              {link.date}
-                            </Typography>
-                          </Box>
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                  {
+                        responseData.length > 0 ? (
+
+                          responseData.slice(page * limit , page * limit + limit).map(link => (
+                            <TableRow hover key={link.date}>
+                              <TableCell>
+                                <Box alignItems="center" display="flex">
+                                  <Typography color="textPrimary" variant="body1">
+                                    {link.file_name}
+                                  </Typography>
+                                </Box>
+                              </TableCell>
+                              <TableCell>
+                                <Box alignItems="center" display="flex">
+                                  <Typography color="textPrimary" variant="body1">
+                                    <Link href={link.url}>Descargar</Link>
+                                  </Typography>
+                                </Box>
+                              </TableCell>
+                              <TableCell>
+                                <Box alignItems="center" display="flex">
+                                  <Typography color="textPrimary" variant="body1">
+                                    {link.date}
+                                  </Typography>
+                                </Box>
+                              </TableCell>
+                            </TableRow>
+                          ))
+
+                        ):(
+                          <h3>Por el momento no tiene archivos cargados.</h3>
+                        )
+                      }
                   </TableBody>
                 </Table>
               </Box>

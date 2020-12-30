@@ -124,7 +124,7 @@ const ProfileDetails = ({ className,user1, ...rest }) => {
             color="primary"
             variant="contained"
           >
-            Save details
+            Guardar detalles
           </Button>
         </Box>
       </Card>
