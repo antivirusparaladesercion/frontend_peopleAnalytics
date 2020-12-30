@@ -154,6 +154,7 @@ const Upload = ({ className,prefi,userMetadata, ...rest }) => {
           </Button>
         </Box>
       </Card>
+      <br></br>
     </form>
   );
 };

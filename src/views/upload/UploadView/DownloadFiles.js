@@ -106,7 +106,7 @@ const DownloadFiles = ({ className, prefi, ...rest }) => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {responseData.slice(0, limit).map(link => (
+                      {responseData.slice(page * limit , page * limit + limit).map(link => (
                         <TableRow hover key={link.date}>
                           <TableCell>
                             <Box alignItems="center" display="flex">
