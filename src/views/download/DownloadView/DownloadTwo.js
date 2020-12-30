@@ -53,6 +53,9 @@ const DownloadTwo = ({ className, customers, prefi, ...rest }) => {
       }
     })
       .then(res => {
+        res.data.data.sort(function(a,b){
+          return new Date(b.date) - new Date(a.date);
+        }); // Ordenar la respuesta
         setResponseData(res.data.data);
       })
       .catch(err => console.log(err));
