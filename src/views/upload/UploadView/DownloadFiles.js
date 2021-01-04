@@ -72,7 +72,7 @@ const DownloadFiles = ({ className, prefi, ...rest }) => {
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
   };
- console.log('la responsedata',responseData);
+ 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
       {responseData === '' ? (
@@ -106,31 +106,40 @@ const DownloadFiles = ({ className, prefi, ...rest }) => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {responseData.slice(page * limit , page * limit + limit).map(link => (
-                        <TableRow hover key={link.date}>
-                          <TableCell>
-                            <Box alignItems="center" display="flex">
-                              <Typography color="textPrimary" variant="body1">
-                                {link.file_name}
-                              </Typography>
-                            </Box>
-                          </TableCell>
-                          <TableCell>
-                            <Box alignItems="center" display="flex">
-                              <Typography color="textPrimary" variant="body1">
-                                <Link href={link.url}>Descargar</Link>
-                              </Typography>
-                            </Box>
-                          </TableCell>
-                          <TableCell>
-                            <Box alignItems="center" display="flex">
-                              <Typography color="textPrimary" variant="body1">
-                                {link.date}
-                              </Typography>
-                            </Box>
-                          </TableCell>
-                        </TableRow>
-                      ))}
+                      {
+                        responseData.length > 0 ? (
+
+                          responseData.slice(page * limit , page * limit + limit).map(link => (
+                            <TableRow hover key={link.date}>
+                              <TableCell>
+                                <Box alignItems="center" display="flex">
+                                  <Typography color="textPrimary" variant="body1">
+                                    {link.file_name}
+                                  </Typography>
+                                </Box>
+                              </TableCell>
+                              <TableCell>
+                                <Box alignItems="center" display="flex">
+                                  <Typography color="textPrimary" variant="body1">
+                                    <Link href={link.url}>Descargar</Link>
+                                  </Typography>
+                                </Box>
+                              </TableCell>
+                              <TableCell>
+                                <Box alignItems="center" display="flex">
+                                  <Typography color="textPrimary" variant="body1">
+                                    {link.date}
+                                  </Typography>
+                                </Box>
+                              </TableCell>
+                            </TableRow>
+                          ))
+
+                        ):(
+                          <h3>Por el momento no tiene archivos Cargados.</h3>
+                        )
+                      }
+                      
                     </TableBody>
                   </Table>
                 </Box>
