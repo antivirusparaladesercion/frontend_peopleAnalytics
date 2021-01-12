@@ -29,7 +29,7 @@ const useStyles = makeStyles(() => ({
 const Upload = ({ className,prefi,userMetadata, ...rest }) => {
   //Obtener metadata
 
-  
+  console.log('fecha: ',Date.now())
 
   //
   const classes = useStyles();
@@ -70,11 +70,20 @@ const Upload = ({ className,prefi,userMetadata, ...rest }) => {
         const formData = new FormData();
         formData.append('bucketName', prefi);
         formData.append('data', values['archivo'][0]);
+        const nameFile= values['archivo'][0].name.split('.')[0]+'-'+Date.now()+'.csv'
         console.log('el archivo: ', values['archivo'][0]);
+        console.log('la data',formData)
+        console.log('archivo:',nameFile)
         await axios
-          .post('http://ApiPeopleAnalyticsDev-env.eba-v39ukvyc.us-east-2.elasticbeanstalk.com/api/v1/data-upload', formData, {
+          .post('https://unquseq0xf.execute-api.us-east-1.amazonaws.com/cargaDeArchivo', formData, {
             headers: {
-              enctype: 'multipart/form-data'
+              'Content-Type': 'multipart/form-data'
+             
+            },
+            params:{
+              bucketName: userMetadata.u_prefix,
+              nameFile: nameFile
+              
             }
           })
           .then(res => {
