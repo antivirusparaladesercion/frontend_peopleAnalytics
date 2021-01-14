@@ -24,7 +24,6 @@ const useStyles = makeStyles(() => ({
 
 const Profile = ({ className, user1, ...rest }) => {
   const classes = useStyles();
-  console.log('mi user en el detalle de perfil', user1);
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
       <CardContent>

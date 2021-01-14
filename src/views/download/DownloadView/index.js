@@ -60,11 +60,9 @@ const DownloadView = () => {
     getUserMetadata();
   }, []);
 
-  console.log('uuser: ', user)
   let prefijo='';
   if (userMetadata) {
     prefijo = userMetadata.u_prefix;
-    console.log('prueba adentro prefix_u arriba download: ');
   }
   
   

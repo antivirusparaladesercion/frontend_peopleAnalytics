@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import clsx from 'clsx';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import Swal from 'sweetalert2';
 import {
   Button,
   Card,
@@ -17,7 +17,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
+  Paper
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
@@ -45,47 +45,85 @@ const ProfileDetails = ({ className, user1, metadata, ...rest }) => {
       url:
         'https://3lm0f6w2tk.execute-api.us-east-1.amazonaws.com/prod/mail/list/',
       params: {
-        prefix_uni: 'udea'
+        prefix_uni: metadata.u_prefix
       }
     })
       .then(res => {
         setValues({
           emailsSend: res.data
         });
-        console.log('EL VALOR EN EL ESTADO: ', values.emailsSend);
       })
       .catch(err => console.log(err));
   };
 
   const handleChange = event => setEmailTemp(event.target.value);
 
+  const handleRemoveEmail = item => () => {
+
+    console.log('EL ID DEL ITEM: ', item.id);
+
+    let requestOptions = {
+      method: 'DELETE',
+      redirect: 'follow'
+    };
+    
+    fetch(`https://3lm0f6w2tk.execute-api.us-east-1.amazonaws.com/prod/mail/delete/?id=${item.id}`, requestOptions)
+      .then(() => {
+        let items = values.emailsSend.filter(email => email.id != item.id);
+        setValues({
+          emailsSend: items
+        });
+      })
+      .catch(error =>
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al eliminar'
+        }));
+  };
+
   const handleAddEmail = () => {
-    const newValues = [
-      ...values.emailsSend,
-      {
-        university: user1.name,
-        id: 1,
-        email: emailTemp
+    const config = {
+      headers: {
+        'Content-Type': 'text/plain'
       }
-    ];
-    setValues({
-      emailsSend: newValues
-    });
-    console.log(values.emailsSend);
+    };
+
+    axios
+      .post(
+        'https://3lm0f6w2tk.execute-api.us-east-1.amazonaws.com/prod/mail',
+        {
+          email: emailTemp,
+          university: user1.name,
+          u_prefix: metadata.u_prefix
+        },
+        config
+      )
+      .then(res => {
+        const newValues = [
+          ...values.emailsSend,
+          {
+            university: res.data.university,
+            id: res.data.id,
+            email: res.data.email
+          }
+        ];
+        setValues({
+          emailsSend: newValues
+        });
+      })
+      .catch(error =>
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No se pudo registrar el email'
+        })
+      );
   };
 
   useEffect(() => {
     fetchEmails();
   }, [metadata]);
-
-  if (!metadata) {
-    console.log('METADATA NULA');
-  } else {
-    console.log(
-      'LA METADATA DEL DETALLE DE PERFIL ES LA SIGUIENTE: ',
-      metadata.u_prefix
-    );
-  }
 
   return (
     <>
@@ -148,6 +186,7 @@ const ProfileDetails = ({ className, user1, metadata, ...rest }) => {
                           color="secondary"
                           className={classes.button}
                           startIcon={<DeleteIcon />}
+                          onClick={handleRemoveEmail(element)}
                         >
                           {' '}
                           Eliminar

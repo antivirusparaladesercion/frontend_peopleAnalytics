@@ -29,7 +29,6 @@ const useStyles = makeStyles(() => ({
 const Upload = ({ className,prefi,userMetadata, ...rest }) => {
   //Obtener metadata
 
-  console.log('fecha: ',Date.now())
 
   //
   const classes = useStyles();
@@ -53,7 +52,6 @@ const Upload = ({ className,prefi,userMetadata, ...rest }) => {
   };
 
   const handleSubmit = async event => {
-    console.log('aprete boton',prefi,userMetadata)
     event.preventDefault();
     try {
       if (!values['archivo']) {
@@ -62,18 +60,11 @@ const Upload = ({ className,prefi,userMetadata, ...rest }) => {
       //
 
       if (prefi.length > 0 && userMetadata) {
-        console.log(
-          'prueba adentro para enviar a bucket: ',
-           userMetadata.u_prefix
-        );
 
         const formData = new FormData();
         formData.append('bucketName', prefi);
         formData.append('data', values['archivo'][0]);
         const nameFile= values['archivo'][0].name.split('.')[0]+'-'+Date.now()+'.csv'
-        console.log('el archivo: ', values['archivo'][0]);
-        console.log('la data',formData)
-        console.log('archivo:',nameFile)
         await axios
           .post('https://unquseq0xf.execute-api.us-east-1.amazonaws.com/cargaDeArchivo', formData, {
             headers: {

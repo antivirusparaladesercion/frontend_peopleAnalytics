@@ -31,7 +31,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const DownloadFiles = ({ className, prefi, ...rest }) => {
-  console.log('el prefix enviado', prefi)
   const classes = useStyles();
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);

@@ -29,7 +29,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const DownloadTwo = ({ className, customers, prefi, ...rest }) => {
-  console.log('el prefix enviado', prefi);
   const classes = useStyles();
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);

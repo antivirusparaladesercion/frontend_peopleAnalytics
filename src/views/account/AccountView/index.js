@@ -50,7 +50,7 @@ const Account = () => {
   }, []);
 
   return (
-    isAuthenticated && (
+    isAuthenticated && userMetadata &&(
       <Page className={classes.root} title="Account">
         <Container maxWidth="lg">
           <Grid container spacing={3}>
