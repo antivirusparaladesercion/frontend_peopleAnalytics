@@ -22,6 +22,7 @@ import {
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
+import validator from 'validator';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -72,7 +73,7 @@ const ProfileDetails = ({ className, user1, metadata, ...rest }) => {
     
     fetch(`https://3lm0f6w2tk.execute-api.us-east-1.amazonaws.com/prod/mail/delete/?id=${item.id}`, requestOptions)
       .then(() => {
-        let items = values.emailsSend.filter(email => email.id != item.id);
+        let items = values.emailsSend.filter(email => email.id !== item.id);
         setValues({
           name: user1.name,
           email: user1.email,
@@ -131,6 +132,7 @@ const ProfileDetails = ({ className, user1, metadata, ...rest }) => {
   useEffect(() => {
     fetchEmails();
   }, [metadata]);
+
 
   return (
     <>
@@ -192,11 +194,12 @@ const ProfileDetails = ({ className, user1, metadata, ...rest }) => {
                   <TableRow key="create">
                     <TableCell component="th" scope="row">
                       <TextField
-                        fullWidth
+                        error={validator.isEmail(emailTemp) || emailTemp === '' ? false : true}
                         name="add_email"
                         required
                         variant="outlined"
                         placeholder="Añadir email"
+                        helperText={validator.isEmail(emailTemp) || emailTemp === '' ? false : 'No es un correo'}
                         onChange={handleChange}
                         value={emailTemp}
                       />
@@ -204,6 +207,7 @@ const ProfileDetails = ({ className, user1, metadata, ...rest }) => {
                     <TableCell align="center">
                       <Button
                         variant="contained"
+                        disabled={validator.isEmail(emailTemp) ? false : true}
                         color="secondary"
                         className={classes.button}
                         endIcon={<SaveIcon />}

@@ -1,12 +1,10 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import logo from '../../assets/logo.png';
 import {
   Box,
   Button,
   Container,
-  TextField,
   Typography,
   makeStyles
 } from '@material-ui/core';
@@ -27,7 +25,6 @@ const useStyles = makeStyles(theme => ({
 const LoginView = () => {
   const { loginWithRedirect } = useAuth0();
   const classes = useStyles();
-  const navigate = useNavigate();
 
   return (
    

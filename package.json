@@ -31,7 +31,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@material-ui/styles": "^4.10.0",
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "chart.js": "^2.9.3",
     "clsx": "^1.1.1",
     "formik": "^2.1.5",
@@ -52,6 +52,7 @@
     "react-scripts": "^3.4.1",
     "sweetalert2": "^10.9.0",
     "uuid": "^8.3.0",
+    "validator": "^13.5.2",
     "yup": "^0.29.3"
   },
   "devDependencies": {
