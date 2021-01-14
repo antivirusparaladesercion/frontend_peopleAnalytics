@@ -14,12 +14,11 @@ import {
 import {
   UploadCloud as UploadCloudIcon,
   DownloadCloud as DownloadCloudIcon,
-  Lock as LockIcon,
   User as UserIcon
 } from 'react-feather';
 import NavItem from './NavItem';
 
-import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const items = [
   {

@@ -17,7 +17,8 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper
+  Paper,
+  Typography,
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
@@ -50,6 +51,8 @@ const ProfileDetails = ({ className, user1, metadata, ...rest }) => {
     })
       .then(res => {
         setValues({
+          name: user1.name,
+          email: user1.email,
           emailsSend: res.data
         });
       })
@@ -71,6 +74,8 @@ const ProfileDetails = ({ className, user1, metadata, ...rest }) => {
       .then(() => {
         let items = values.emailsSend.filter(email => email.id != item.id);
         setValues({
+          name: user1.name,
+          email: user1.email,
           emailsSend: items
         });
       })
@@ -109,6 +114,8 @@ const ProfileDetails = ({ className, user1, metadata, ...rest }) => {
           }
         ];
         setValues({
+          name: user1.name,
+          email: user1.email,
           emailsSend: newValues
         });
       })
@@ -133,27 +140,14 @@ const ProfileDetails = ({ className, user1, metadata, ...rest }) => {
         <CardContent>
           <Grid container spacing={3}>
             <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                //helperText="Please specify the first name"
-                label="Nombre Universidad"
-                name="firstName"
-                value={values.name}
-                variant="outlined"
-                disabled
-                required
-              />
+            <Typography color="textSecondary" variant="body1">
+            Universidad: {values.name}
+          </Typography>
             </Grid>
             <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                required
-                label="Email"
-                name="email"
-                value={values.email}
-                variant="outlined"
-                disabled
-              />
+            <Typography color="textSecondary" variant="body1">
+            Email: {values.email}
+          </Typography>
             </Grid>
           </Grid>
         </CardContent>
@@ -199,11 +193,12 @@ const ProfileDetails = ({ className, user1, metadata, ...rest }) => {
                     <TableCell component="th" scope="row">
                       <TextField
                         fullWidth
-                        name="email"
+                        name="add_email"
                         required
                         variant="outlined"
                         placeholder="Añadir email"
                         onChange={handleChange}
+                        value={emailTemp}
                       />
                     </TableCell>
                     <TableCell align="center">

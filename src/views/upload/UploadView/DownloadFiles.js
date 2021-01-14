@@ -160,8 +160,7 @@ const DownloadFiles = ({ className, prefi, ...rest }) => {
 };
 
 DownloadFiles.propTypes = {
-  className: PropTypes.string,
-  customers: PropTypes.array.isRequired
+  className: PropTypes.string
 };
 
 export default DownloadFiles;

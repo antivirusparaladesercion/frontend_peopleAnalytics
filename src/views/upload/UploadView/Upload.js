@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import clsx from 'clsx';
@@ -11,13 +11,9 @@ import {
   CardHeader,
   Divider,
   Grid,
-  TextField,
   makeStyles,
   Typography
 } from '@material-ui/core';
-
-import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react';
-//import config from 'src/auth_config.json';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -36,13 +32,6 @@ const Upload = ({ className,prefi,userMetadata, ...rest }) => {
     universidad: 'udea',
     archivo: null
   });
-
-  const handleChange = event => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value
-    });
-  };
 
   const handleChangeFile = event => {
     setValues({

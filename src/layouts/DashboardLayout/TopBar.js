@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
   AppBar,
-  Badge,
   Box,
   Hidden,
   IconButton,
@@ -13,7 +12,6 @@ import {
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import InputIcon from '@material-ui/icons/Input';
-import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import Logo from 'src/components/Logo';
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -27,7 +25,7 @@ const useStyles = makeStyles(() => ({
 
 const TopBar = ({ className, onMobileNavOpen, ...rest }) => {
   const classes = useStyles();
-  const { loginWithRedirect, logout } = useAuth0();
+  const { logout } = useAuth0();
 
   return (
     <AppBar className={clsx(classes.root, className)} elevation={0} {...rest}>

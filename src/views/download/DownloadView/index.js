@@ -24,7 +24,7 @@ const DownloadView = () => {
 
   //prueba dinamica
 
-  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const { user, getAccessTokenSilently } = useAuth0();
 
 
 
