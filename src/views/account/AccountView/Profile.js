@@ -14,8 +14,6 @@ import {
   makeStyles
 } from '@material-ui/core';
 
-
-
 const useStyles = makeStyles(() => ({
   root: {},
   avatar: {
@@ -24,24 +22,14 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Profile = ({ className,user1, ...rest }) => {
+const Profile = ({ className, user1, ...rest }) => {
   const classes = useStyles();
- console.log('mi user',user1)
+  console.log('mi user en el detalle de perfil', user1);
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardContent>
-        <Box
-          alignItems="center"
-          display="flex"
-          flexDirection="column"
-        >
-          <Avatar
-            className={classes.avatar}
-            src={user1.picture}
-          />
+        <Box alignItems="center" display="flex" flexDirection="column">
+          <Avatar className={classes.avatar} src={user1.picture} />
           <Typography
             color="textPrimary"
             gutterBottom
@@ -50,10 +38,7 @@ const Profile = ({ className,user1, ...rest }) => {
           >
             {user1.name}
           </Typography>
-          <Typography
-            color="textSecondary"
-            variant="body1"
-          >
+          <Typography color="textSecondary" variant="body1">
             {`Actualizado`}
           </Typography>
           <Typography
@@ -66,7 +51,6 @@ const Profile = ({ className,user1, ...rest }) => {
         </Box>
       </CardContent>
       <Divider />
-      
     </Card>
   );
 };
