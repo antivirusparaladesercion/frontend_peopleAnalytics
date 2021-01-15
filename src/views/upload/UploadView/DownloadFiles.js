@@ -21,8 +21,6 @@ import {
   Divider
 } from '@material-ui/core';
 
-
-
 const useStyles = makeStyles(theme => ({
   root: {},
   avatar: {
@@ -37,11 +35,7 @@ const DownloadFiles = ({ className, prefi, ...rest }) => {
 
   let [responseData, setResponseData] = useState('');
 
-  
-
-
   const fetchData = async () => {
-    
     await axios({
       method: 'post',
       url:
@@ -52,7 +46,7 @@ const DownloadFiles = ({ className, prefi, ...rest }) => {
       }
     })
       .then(res => {
-        res.data.data.sort(function(a,b){
+        res.data.data.sort(function(a, b) {
           return new Date(b.date) - new Date(a.date);
         }); // Ordenar la respuesta
         setResponseData(res.data.data);
@@ -71,7 +65,7 @@ const DownloadFiles = ({ className, prefi, ...rest }) => {
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
   };
- 
+
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
       {responseData === '' ? (
@@ -87,74 +81,71 @@ const DownloadFiles = ({ className, prefi, ...rest }) => {
           </CardContent>
         </>
       ) : (
-          <>
-            <CardHeader
-              subheader="Estos son los archivos que se han cargado al sistema para ser analizados."
-              title="Archivos Cargados"
+        <>
+          <CardHeader
+            subheader="Estos son los archivos que se han cargado al sistema para ser analizados."
+            title="Archivos Cargados"
+          />
+          <Divider />
+          <CardContent>
+            <PerfectScrollbar>
+              <Box minWidth={1050}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Archivo</TableCell>
+                      <TableCell>Link de descarga</TableCell>
+                      <TableCell>Fecha de carga del archivo</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {responseData.length > 0 ? (
+                      responseData
+                        .slice(page * limit, page * limit + limit)
+                        .map(link => (
+                          <TableRow hover key={link.date}>
+                            <TableCell>
+                              <Box alignItems="center" display="flex">
+                                <Typography color="textPrimary" variant="body1">
+                                  {link.file_name}
+                                </Typography>
+                              </Box>
+                            </TableCell>
+                            <TableCell>
+                              <Box alignItems="center" display="flex">
+                                <Typography color="textPrimary" variant="body1">
+                                  <Link href={link.url}>Descargar</Link>
+                                </Typography>
+                              </Box>
+                            </TableCell>
+                            <TableCell>
+                              <Box alignItems="center" display="flex">
+                                <Typography color="textPrimary" variant="body1">
+                                  {link.date}
+                                </Typography>
+                              </Box>
+                            </TableCell>
+                          </TableRow>
+                        ))
+                    ) : (
+                      <h3>Por el momento no tiene archivos Cargados.</h3>
+                    )}
+                  </TableBody>
+                </Table>
+              </Box>
+            </PerfectScrollbar>
+            <TablePagination
+              component="div"
+              count={responseData.length}
+              onChangePage={handlePageChange}
+              onChangeRowsPerPage={handleLimitChange}
+              page={page}
+              rowsPerPage={limit}
+              rowsPerPageOptions={[5, 10, 25]}
             />
-            <Divider />
-            <CardContent>
-              <PerfectScrollbar>
-                <Box minWidth={1050}>
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Archivo</TableCell>
-                        <TableCell>Link de descarga</TableCell>
-                        <TableCell>Fecha de carga del archivo</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {
-                        responseData.length > 0 ? (
-
-                          responseData.slice(page * limit , page * limit + limit).map(link => (
-                            <TableRow hover key={link.date}>
-                              <TableCell>
-                                <Box alignItems="center" display="flex">
-                                  <Typography color="textPrimary" variant="body1">
-                                    {link.file_name}
-                                  </Typography>
-                                </Box>
-                              </TableCell>
-                              <TableCell>
-                                <Box alignItems="center" display="flex">
-                                  <Typography color="textPrimary" variant="body1">
-                                    <Link href={link.url}>Descargar</Link>
-                                  </Typography>
-                                </Box>
-                              </TableCell>
-                              <TableCell>
-                                <Box alignItems="center" display="flex">
-                                  <Typography color="textPrimary" variant="body1">
-                                    {link.date}
-                                  </Typography>
-                                </Box>
-                              </TableCell>
-                            </TableRow>
-                          ))
-
-                        ):(
-                          <h3>Por el momento no tiene archivos Cargados.</h3>
-                        )
-                      }
-                      
-                    </TableBody>
-                  </Table>
-                </Box>
-              </PerfectScrollbar>
-              <TablePagination
-                component="div"
-                count={responseData.length}
-                onChangePage={handlePageChange}
-                onChangeRowsPerPage={handleLimitChange}
-                page={page}
-                rowsPerPage={limit}
-                rowsPerPageOptions={[5, 10, 25]}
-              />
-            </CardContent>
-          </>
-        )}
+          </CardContent>
+        </>
+      )}
     </Card>
   );
 };

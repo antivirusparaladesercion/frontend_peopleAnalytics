@@ -1,9 +1,9 @@
-import React,{ useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, makeStyles } from '@material-ui/core';
 import Page from 'src/components/Page';
 import Upload from './Upload';
 import DownloadFiles from './DownloadFiles';
-import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
+import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,14 +17,9 @@ const useStyles = makeStyles(theme => ({
 function UploadView() {
   const classes = useStyles();
 
-  //prueba dinamica
-
   const { user, getAccessTokenSilently } = useAuth0();
 
-
-
   const [userMetadata, setUserMetadata] = useState(null);
-
 
   useEffect(() => {
     const getUserMetadata = async () => {
@@ -33,15 +28,15 @@ function UploadView() {
       try {
         const accessToken = await getAccessTokenSilently({
           audience: `https://${domain}/api/v2/`,
-          scope: "read:current_user",
+          scope: 'read:current_user'
         });
 
         const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
 
         const metadataResponse = await fetch(userDetailsByIdUrl, {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
+            Authorization: `Bearer ${accessToken}`
+          }
         });
 
         const { user_metadata } = await metadataResponse.json();
@@ -55,38 +50,26 @@ function UploadView() {
     getUserMetadata();
   }, []);
 
-  let prefijo='';
+  let prefijo = '';
   if (userMetadata) {
     prefijo = userMetadata.u_prefix;
   }
-  
-  
-  
 
-  
+  return (
+    prefijo.length > 0 && (
+      <Page className={classes.root} title="Upload Files">
+        <Container maxWidth={false}>
+          <Upload userMetadata={userMetadata} prefi={prefijo} />
+        </Container>
 
-
-  //
-
-  return prefijo.length >0 && (
-    <Page className={classes.root} title="Upload Files">
-      <Container maxWidth={false}>
-
-        <Upload userMetadata={userMetadata} prefi={prefijo}/>
-
-      </Container>
-      
-
-      <Container maxWidth={false}>
-
-        <DownloadFiles prefi={prefijo}/>
-
-      </Container>
-
-    </Page>
+        <Container maxWidth={false}>
+          <DownloadFiles prefi={prefijo} />
+        </Container>
+      </Page>
+    )
   );
 }
 
 export default withAuthenticationRequired(UploadView, {
-  onRedirecting: () => <h3>Cargando</h3>,
+  onRedirecting: () => <h3>Cargando</h3>
 });

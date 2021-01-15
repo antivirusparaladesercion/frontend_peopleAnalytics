@@ -22,11 +22,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Upload = ({ className,prefi,userMetadata, ...rest }) => {
-  //Obtener metadata
-
-
-  //
+const Upload = ({ className, prefi, userMetadata, ...rest }) => {
   const classes = useStyles();
   const [values, setValues] = useState({
     universidad: 'udea',
@@ -49,23 +45,25 @@ const Upload = ({ className,prefi,userMetadata, ...rest }) => {
       //
 
       if (prefi.length > 0 && userMetadata) {
-
         const formData = new FormData();
         formData.append('bucketName', prefi);
         formData.append('data', values['archivo'][0]);
-        const nameFile= values['archivo'][0].name.split('.')[0]+'-'+Date.now()+'.csv'
+        const nameFile =
+          values['archivo'][0].name.split('.')[0] + '-' + Date.now() + '.csv';
         await axios
-          .post('https://unquseq0xf.execute-api.us-east-1.amazonaws.com/cargaDeArchivo', formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-             
-            },
-            params:{
-              bucketName: userMetadata.u_prefix,
-              nameFile: nameFile
-              
+          .post(
+            'https://unquseq0xf.execute-api.us-east-1.amazonaws.com/cargaDeArchivo',
+            formData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              },
+              params: {
+                bucketName: userMetadata.u_prefix,
+                nameFile: nameFile
+              }
             }
-          })
+          )
           .then(res => {
             Swal.fire(
               'Buen trabajo!',
@@ -74,10 +72,6 @@ const Upload = ({ className,prefi,userMetadata, ...rest }) => {
             );
           });
       }
-
-      //
-
-      // handle success
     } catch (error) {
       // handle error
     }

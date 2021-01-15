@@ -4,7 +4,6 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { backgroundvid } from '../../assets/videobackground.mp4';
 
-
 import {
   Box,
   Button,
@@ -30,14 +29,12 @@ const HomeView = () => {
 
   return (
     <Page className={classes.root} title="Login">
-
       <Box
         display="flex"
         flexDirection="column"
         height="100%"
         justifyContent="center"
       >
-        
         <Container maxWidth="sm">
           <Formik
             initialValues={{
@@ -66,61 +63,59 @@ const HomeView = () => {
               touched,
               values
             }) => (
-                <form onSubmit={handleSubmit}>
-                  <Box mb={3}>
-                    
-                  
-                    <Typography color="textPrimary" variant="h2">
-                      Bienvenidos
+              <form onSubmit={handleSubmit}>
+                <Box mb={3}>
+                  <Typography color="textPrimary" variant="h2">
+                    Bienvenidos
                   </Typography>
-                    <Typography
-                      color="textSecondary"
-                      gutterBottom
-                      variant="body2"
-                    >
-                      Inicia sesión en la plataforma de people analytics
+                  <Typography
+                    color="textSecondary"
+                    gutterBottom
+                    variant="body2"
+                  >
+                    Inicia sesión en la plataforma de people analytics
                   </Typography>
-                  </Box>
-                  <TextField
-                    error={Boolean(touched.email && errors.email)}
+                </Box>
+                <TextField
+                  error={Boolean(touched.email && errors.email)}
+                  fullWidth
+                  helperText={touched.email && errors.email}
+                  label="Dirección de correo electrónico"
+                  margin="normal"
+                  name="email"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  type="email"
+                  value={values.email}
+                  variant="outlined"
+                />
+                <TextField
+                  error={Boolean(touched.password && errors.password)}
+                  fullWidth
+                  helperText={touched.password && errors.password}
+                  label="Contraseña"
+                  margin="normal"
+                  name="password"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  type="password"
+                  value={values.password}
+                  variant="outlined"
+                />
+                <Box my={2}>
+                  <Button
+                    color="primary"
+                    disabled={isSubmitting}
                     fullWidth
-                    helperText={touched.email && errors.email}
-                    label="Dirección de correo electrónico"
-                    margin="normal"
-                    name="email"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    type="email"
-                    value={values.email}
-                    variant="outlined"
-                  />
-                  <TextField
-                    error={Boolean(touched.password && errors.password)}
-                    fullWidth
-                    helperText={touched.password && errors.password}
-                    label="Contraseña"
-                    margin="normal"
-                    name="password"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    type="password"
-                    value={values.password}
-                    variant="outlined"
-                  />
-                  <Box my={2}>
-                    <Button
-                      color="primary"
-                      disabled={isSubmitting}
-                      fullWidth
-                      size="large"
-                      type="submit"
-                      variant="contained"
-                    >
-                      Ingresar
+                    size="large"
+                    type="submit"
+                    variant="contained"
+                  >
+                    Ingresar
                   </Button>
-                  </Box>
-                </form>
-              )}
+                </Box>
+              </form>
+            )}
           </Formik>
         </Container>
       </Box>

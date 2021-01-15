@@ -18,7 +18,7 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Typography,
+  Typography
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
@@ -63,15 +63,17 @@ const ProfileDetails = ({ className, user1, metadata, ...rest }) => {
   const handleChange = event => setEmailTemp(event.target.value);
 
   const handleRemoveEmail = item => () => {
-
     console.log('EL ID DEL ITEM: ', item.id);
 
     let requestOptions = {
       method: 'DELETE',
       redirect: 'follow'
     };
-    
-    fetch(`https://3lm0f6w2tk.execute-api.us-east-1.amazonaws.com/prod/mail/delete/?id=${item.id}`, requestOptions)
+
+    fetch(
+      `https://3lm0f6w2tk.execute-api.us-east-1.amazonaws.com/prod/mail/delete/?id=${item.id}`,
+      requestOptions
+    )
       .then(() => {
         let items = values.emailsSend.filter(email => email.id !== item.id);
         setValues({
@@ -85,7 +87,8 @@ const ProfileDetails = ({ className, user1, metadata, ...rest }) => {
           icon: 'error',
           title: 'Error',
           text: 'Error al eliminar'
-        }));
+        })
+      );
   };
 
   const handleAddEmail = () => {
@@ -133,7 +136,6 @@ const ProfileDetails = ({ className, user1, metadata, ...rest }) => {
     fetchEmails();
   }, [metadata]);
 
-
   return (
     <>
       <Card>
@@ -142,14 +144,14 @@ const ProfileDetails = ({ className, user1, metadata, ...rest }) => {
         <CardContent>
           <Grid container spacing={3}>
             <Grid item md={6} xs={12}>
-            <Typography color="textSecondary" variant="body1">
-            Universidad: {values.name}
-          </Typography>
+              <Typography color="textSecondary" variant="body1">
+                Universidad: {values.name}
+              </Typography>
             </Grid>
             <Grid item md={6} xs={12}>
-            <Typography color="textSecondary" variant="body1">
-            Email: {values.email}
-          </Typography>
+              <Typography color="textSecondary" variant="body1">
+                Email: {values.email}
+              </Typography>
             </Grid>
           </Grid>
         </CardContent>
@@ -194,12 +196,20 @@ const ProfileDetails = ({ className, user1, metadata, ...rest }) => {
                   <TableRow key="create">
                     <TableCell component="th" scope="row">
                       <TextField
-                        error={validator.isEmail(emailTemp) || emailTemp === '' ? false : true}
+                        error={
+                          validator.isEmail(emailTemp) || emailTemp === ''
+                            ? false
+                            : true
+                        }
                         name="add_email"
                         required
                         variant="outlined"
                         placeholder="Añadir email"
-                        helperText={validator.isEmail(emailTemp) || emailTemp === '' ? false : 'No es un correo'}
+                        helperText={
+                          validator.isEmail(emailTemp) || emailTemp === ''
+                            ? false
+                            : 'No es un correo'
+                        }
                         onChange={handleChange}
                         value={emailTemp}
                       />

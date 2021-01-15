@@ -17,9 +17,8 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.dark,
     height: '100%',
     paddingBottom: theme.spacing(3),
-    paddingTop: theme.spacing(3),
-    
-  },
+    paddingTop: theme.spacing(3)
+  }
 }));
 
 const LoginView = () => {
@@ -27,40 +26,36 @@ const LoginView = () => {
   const classes = useStyles();
 
   return (
-   
     <Page className={classes.root} title="Login">
-        <video autoPlay loop muted
-          style={{
-            position: "absolute",
-            width: "100%",
-            left: "50%",
-            top:"50%",
-            height: "100%",
-            objectFit: "cover",
-            transform: "translate(-50%, -50%)",
-            zindex:"-1",
-          }}
-        >
-    <source src={backgroundvid} type="video/mp4" />
-     </video>
+      <video
+        autoPlay
+        loop
+        muted
+        style={{
+          position: 'absolute',
+          width: '100%',
+          left: '50%',
+          top: '50%',
+          height: '100%',
+          objectFit: 'cover',
+          transform: 'translate(-50%, -50%)',
+          zindex: '-1'
+        }}
+      >
+        <source src={backgroundvid} type="video/mp4" />
+      </video>
       <Box
         display="flex"
         flexDirection="column"
         height="100%"
         justifyContent="center"
         mx="auto"
-        
       >
-        
         <Container maxWidth="sm" justifyContent="center">
-          
-          <Box mb={3}
-          
-          justifyContent= "center"
-          position="relative"
-          color= "white"
-          >  <Avatar alt="logo" src={logo} className={classes.large} />
-            <Typography color="text.primary" variant="h1" >
+          <Box mb={3} justifyContent="center" position="relative" color="white">
+            {' '}
+            <Avatar alt="logo" src={logo} className={classes.large} />
+            <Typography color="text.primary" variant="h1">
               Bienvenido
             </Typography>
             <Typography color="text.secondary" gutterBottom variant="body2">
@@ -80,10 +75,7 @@ const LoginView = () => {
               Ingresar
             </Button>
           </Box>
-          
-
         </Container>
-        
       </Box>
     </Page>
   );

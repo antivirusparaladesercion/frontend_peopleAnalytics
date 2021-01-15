@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const DownloadTwo = ({ className, customers, prefi, ...rest }) => {
+const DownloadTwo = ({ className, prefi, ...rest }) => {
   const classes = useStyles();
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
@@ -80,7 +80,7 @@ const DownloadTwo = ({ className, customers, prefi, ...rest }) => {
             <LinearProgress color="secondary" />
           </CardContent>
         </>
-      ): (
+      ) : (
         <>
           <CardHeader
             subheader="Estos son los reportes de predicciones que su institución ha generado."
@@ -99,39 +99,37 @@ const DownloadTwo = ({ className, customers, prefi, ...rest }) => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                  {
-                        responseData.length > 0 ? (
-
-                          responseData.slice(page * limit , page * limit + limit).map(link => (
-                            <TableRow hover key={link.date}>
-                              <TableCell>
-                                <Box alignItems="center" display="flex">
-                                  <Typography color="textPrimary" variant="body1">
-                                    {link.file_name}
-                                  </Typography>
-                                </Box>
-                              </TableCell>
-                              <TableCell>
-                                <Box alignItems="center" display="flex">
-                                  <Typography color="textPrimary" variant="body1">
-                                    <Link href={link.url}>Descargar</Link>
-                                  </Typography>
-                                </Box>
-                              </TableCell>
-                              <TableCell>
-                                <Box alignItems="center" display="flex">
-                                  <Typography color="textPrimary" variant="body1">
-                                    {link.date}
-                                  </Typography>
-                                </Box>
-                              </TableCell>
-                            </TableRow>
-                          ))
-
-                        ):(
-                          <h3>Por el momento no tiene archivos cargados.</h3>
-                        )
-                      }
+                    {responseData.length > 0 ? (
+                      responseData
+                        .slice(page * limit, page * limit + limit)
+                        .map(link => (
+                          <TableRow hover key={link.date}>
+                            <TableCell>
+                              <Box alignItems="center" display="flex">
+                                <Typography color="textPrimary" variant="body1">
+                                  {link.file_name}
+                                </Typography>
+                              </Box>
+                            </TableCell>
+                            <TableCell>
+                              <Box alignItems="center" display="flex">
+                                <Typography color="textPrimary" variant="body1">
+                                  <Link href={link.url}>Descargar</Link>
+                                </Typography>
+                              </Box>
+                            </TableCell>
+                            <TableCell>
+                              <Box alignItems="center" display="flex">
+                                <Typography color="textPrimary" variant="body1">
+                                  {link.date}
+                                </Typography>
+                              </Box>
+                            </TableCell>
+                          </TableRow>
+                        ))
+                    ) : (
+                      <h3>Por el momento no tiene archivos cargados.</h3>
+                    )}
                   </TableBody>
                 </Table>
               </Box>
@@ -153,8 +151,7 @@ const DownloadTwo = ({ className, customers, prefi, ...rest }) => {
 };
 
 DownloadTwo.propTypes = {
-  className: PropTypes.string,
-  customers: PropTypes.array.isRequired
+  className: PropTypes.string
 };
 
 export default DownloadTwo;
