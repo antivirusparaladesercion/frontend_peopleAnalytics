@@ -39,7 +39,7 @@ const DownloadFiles = ({ className, prefi, ...rest }) => {
     await axios({
       method: 'post',
       url:
-        'https://x7t8iwhc2e.execute-api.us-east-1.amazonaws.com/getUrlsUploaded',
+        'https://siedoftkpj.execute-api.us-east-1.amazonaws.com/getUrlsUploaded',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {
         nombre_ies: prefi

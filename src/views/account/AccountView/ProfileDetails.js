@@ -45,7 +45,7 @@ const ProfileDetails = ({ className, user1, metadata, ...rest }) => {
     await axios({
       method: 'get',
       url:
-        'https://3lm0f6w2tk.execute-api.us-east-1.amazonaws.com/prod/mail/list/',
+        'https://ohldhmrzv7.execute-api.us-east-1.amazonaws.com/prod/mail/list/',
       params: {
         prefix_uni: metadata.u_prefix
       }
@@ -71,7 +71,7 @@ const ProfileDetails = ({ className, user1, metadata, ...rest }) => {
     };
 
     fetch(
-      `https://3lm0f6w2tk.execute-api.us-east-1.amazonaws.com/prod/mail/delete/?id=${item.id}`,
+      `https://ohldhmrzv7.execute-api.us-east-1.amazonaws.com/prod/mail/delete/?id=${item.id}`,
       requestOptions
     )
       .then(() => {
@@ -100,7 +100,7 @@ const ProfileDetails = ({ className, user1, metadata, ...rest }) => {
 
     axios
       .post(
-        'https://3lm0f6w2tk.execute-api.us-east-1.amazonaws.com/prod/mail',
+        'https://ohldhmrzv7.execute-api.us-east-1.amazonaws.com/prod/mail',
         {
           email: emailTemp,
           university: user1.name,

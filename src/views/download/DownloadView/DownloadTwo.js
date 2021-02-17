@@ -39,7 +39,7 @@ const DownloadTwo = ({ className, prefi, ...rest }) => {
     await axios({
       method: 'post',
       url:
-        'https://zey12u6qr8.execute-api.us-east-1.amazonaws.com/version-prueba',
+        'https://t1qr7g56qa.execute-api.us-east-1.amazonaws.com/getReports',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {
         nombre_ies: prefi
