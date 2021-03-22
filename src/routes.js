@@ -8,6 +8,7 @@ import NotFoundView from 'src/views/errors/NotFoundView';
 // import RegisterView from 'src/views/auth/RegisterView';
 import UploadView from 'src/views/upload/UploadView';
 import DownloadView from './views/download/DownloadView';
+import RequestTrialView from './views/requestTrial/index';
 
 const routes = [
   {
@@ -16,6 +17,7 @@ const routes = [
     element: <MainLayout />,
     children: [
       { path: 'login', element: <LoginView /> },
+      { path: 'request-trial', element: <RequestTrialView />},
       // { path: 'register', element: <RegisterView /> },
       { path: '404', element: <NotFoundView /> },
       { path: '/', element: <Navigate to="/login" /> },

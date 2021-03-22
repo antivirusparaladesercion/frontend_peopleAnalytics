@@ -57,7 +57,7 @@ const DownloadView = () => {
 
   return (
     prefijo.length > 0 && (
-      <Page className={classes.root} title="Customers">
+      <Page className={classes.root} title="Download Predictions">
         <Container maxWidth={false}>
           <Box mt={3}>
             <DownloadTwo prefi={prefijo} />
