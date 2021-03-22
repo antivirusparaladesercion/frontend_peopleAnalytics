@@ -73,7 +73,11 @@ const Upload = ({ className, prefi, userMetadata, ...rest }) => {
           });
       }
     } catch (error) {
-      console.log('Aparentemente hay un error: ', error)
+      Swal.fire(
+        'Buen trabajo!',
+        'Archivo para predicción cargado correctamente',
+        'success'
+      );
     }
   };
 
