@@ -36,6 +36,7 @@ const DownloadFiles = ({ className, prefi, ...rest }) => {
   let [responseData, setResponseData] = useState('');
 
   const fetchData = async () => {
+    console.log('EL PREFIJO DE LA UNIVERSIDAD: ', prefi)
     await axios({
       method: 'post',
       url:

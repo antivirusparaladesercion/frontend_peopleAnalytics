@@ -73,7 +73,7 @@ const Upload = ({ className, prefi, userMetadata, ...rest }) => {
           });
       }
     } catch (error) {
-      // handle error
+      console.log('Aparentemente hay un error: ', error)
     }
   };
 

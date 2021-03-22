@@ -17,6 +17,7 @@ import LoginView from 'src/views/auth/LoginView';
 import NotFoundView from 'src/views/errors/NotFoundView';
 import UploadView from 'src/views/upload/UploadView';
 import DownloadView from './views/download/DownloadView';
+import RequestTrialView from './views/requestTrial/index.js';
 
 const App = () => {
   const { isLoading, error, isAuthenticated } = useAuth0();
@@ -28,6 +29,7 @@ const App = () => {
       element: <MainLayout />,
       children: [
         { path: 'login', element: <LoginView /> },
+        { path: 'request-trial', element: <RequestTrialView /> },
         { path: '404', element: <NotFoundView /> },
         {
           path: '/',
