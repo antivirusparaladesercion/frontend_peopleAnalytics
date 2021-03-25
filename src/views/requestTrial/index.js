@@ -36,6 +36,7 @@ const RequestTrialView = () => {
   const classes = useStyles();
 
   return (
+    <Container>
     <Page className={classes.root} title="Register">
       <Box
         display="flex"
@@ -262,6 +263,7 @@ const RequestTrialView = () => {
         </Container>
       </Box>
     </Page>
+    </Container>
   );
 };
 
