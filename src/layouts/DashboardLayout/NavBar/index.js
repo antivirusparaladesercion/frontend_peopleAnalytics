@@ -32,6 +32,11 @@ const items = [
     title: 'Consultar predicciones'
   },
   {
+    href: '/app/reportes',
+    icon: DownloadCloudIcon,
+    title: 'Generar Reportes'
+  },
+  {
     href: '/app/account',
     icon: UserIcon,
     title: 'Detalle Perfil'

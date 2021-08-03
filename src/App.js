@@ -18,6 +18,7 @@ import NotFoundView from 'src/views/errors/NotFoundView';
 import UploadView from 'src/views/upload/UploadView';
 import DownloadView from './views/download/DownloadView';
 import RequestTrialView from './views/requestTrial/index.js';
+import ReportsView from './views/reports/index';
 
 const App = () => {
   const { isLoading, error, isAuthenticated } = useAuth0();
@@ -49,6 +50,7 @@ const App = () => {
         { path: 'account', element: <AccountView /> },
         { path: 'upload', element: <UploadView /> },
         { path: 'download', element: <DownloadView /> },
+        { path: 'reportes', element: <ReportsView /> },
         { path: '*', element: <Navigate to="/404" /> }
       ]
     }

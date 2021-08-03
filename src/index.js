@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { Auth0Provider } from '@auth0/auth0-react';
 import history from "./utils/history";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 const onRedirectCallback = (appState) => {
   history.push(
     appState && appState.returnTo
